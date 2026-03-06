@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Humanitarian Request - Starlink for Iran</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #2d0a3a 0%, #4a1b5e 50%, #6b2e8a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .main-card {
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(220, 180, 255, 0.3);
+      border-radius: 2.5rem;
+      padding: 2rem;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: white;
+      text-align: center;
+      margin-bottom: 0.3rem;
+      text-shadow: 0 4px 15px #00000080;
+      letter-spacing: -0.02em;
+    }
+    .subhead {
+      color: #e0c0ff;
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      border-bottom: 1px solid #9f7aea;
+      padding-bottom: 1rem;
+    }
+    .bcc-note {
+      background: #3a1b4a;
+      color: #ffd966;
+      padding: 0.8rem;
+      border-radius: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      border: 1px solid #b794f4;
+    }
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .tab {
+      background: rgba(50, 20, 70, 0.8);
+      border: 1px solid #b794f4;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 3rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tab:hover {
+      background: #6b2e8a;
+      border-color: #ffd966;
+      transform: scale(1.02);
+    }
+    .tab.active {
+      background: #7e4a9e;
+      border-color: #ffd966;
+      box-shadow: 0 0 15px #d6b0ff;
+    }
+    .page {
+      display: none;
+    }
+    .page.active-page {
+      display: block;
+    }
+    .version-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1rem 1.5rem;
+      border-radius: 3rem;
+      border: 1px solid #b794f4;
+    }
+    .version-number {
+      font-size: 2.5rem;
+    }
+    .version-title {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .recipient-box {
+      background: rgba(40, 20, 60, 0.8);
+      border-radius: 2rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #b794f4;
+    }
+    .label {
+      color: #d6b0ff;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .emails {
+      color: #f0e6ff;
+      font-size: 0.95rem;
+      word-break: break-word;
+      background: #2a103a;
+      padding: 1rem 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid #b794f4;
+      line-height: 1.6;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.8rem 0;
+    }
+    .btn {
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 8px 20px black;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      flex: 1 1 auto;
+      transition: 0.2s;
+    }
+    .mobile {
+      background: #1e7e44;
+    }
+    .mobile:hover {
+      background: #2e9e5c;
+    }
+    .web {
+      background: #1f4a8a;
+    }
+    .web:hover {
+      background: #2e63b0;
+    }
+    .copy-section {
+      background: rgba(30, 10, 40, 0.7);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      margin: 1.8rem 0;
+      border: 1px solid #b794f4;
+    }
+    .copy-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .copy-btn {
+      background: #3a1f4a;
+      border: 1px solid #c49bff;
+      padding: 0.8rem 1.8rem;
+      border-radius: 3rem;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background: #5a2e70;
+    }
+    .success-msg {
+      background: #1e7e44;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 100px;
+      margin-top: 1rem;
+      animation: fade 2s forwards;
+    }
+    @keyframes fade {
+      0% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .subject-display {
+      color: white;
+      background: #2a103a;
+      padding: 0.8rem 1.5rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+      border: 1px solid #b794f4;
+      word-break: break-word;
+    }
+    .body-preview {
+      background: #1e0b2a;
+      color: #f0e6ff;
+      padding: 1.5rem;
+      border-radius: 1.8rem;
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      border: 1px solid #b794f4;
+      max-height: 500px;
+      overflow-y: auto;
+      line-height: 1.6;
+    }
+    .footer-note {
+      text-align: center;
+      color: #d6b0ff;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      border-top: 1px solid #9f7aea;
+      padding-top: 1rem;
+    }
+    .mobile-note {
+      background: #2a103a;
+      color: #ffd966;
+      padding: 0.8rem;
+      border-radius: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      border: 1px solid #b794f4;
+    }
+    .hidden {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      .tab { padding: 0.6rem 0.8rem; font-size: 0.85rem; }
+      .btn { padding: 0.8rem 1rem; font-size: 1rem; }
+      .version-title { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-card">
+    <h1>🛰️ Humanitarian Request: Starlink for Iran</h1>
+    <div class="subhead">Choose a version to send - All recipients in BCC</div>
+
+    <!-- Mobile helper note -->
+    <div class="mobile-note">
+      📱 <strong>Mobile:</strong> Tap green button → choose mail app → all addresses will be in BCC
+    </div>
+
+    <!-- BCC Information -->
+    <div class="bcc-note">
+      📧 <strong>BCC Protection:</strong> All 11 recipients are placed in BCC to protect privacy and prevent reply-all chains
+    </div>
+
+    <!-- Tab Bar with Version Numbers -->
+    <div class="tab-bar">
+      <div class="tab active" data-page="v1">📝 Version 1</div>
+      <div class="tab" data-page="v2">📝 Version 2</div>
+      <div class="tab" data-page="v3">📝 Version 3</div>
+      <div class="tab" data-page="v4">📝 Version 4</div>
+      <div class="tab" data-page="v5">📝 Version 5</div>
+      <div class="tab" data-page="v6">📝 Version 6</div>
+      <div class="tab" data-page="v7">📝 Version 7</div>
+      <div class="tab" data-page="v8">📝 Version 8</div>
+      <div class="tab" data-page="v9">📝 Version 9</div>
+      <div class="tab" data-page="v10">📝 Version 10</div>
+    </div>
+
+    <!-- Common Recipient Info (shown on all pages) -->
+    <div class="recipient-box">
+      <div class="label">📬 Send to (BCC - All 11 recipients):</div>
+      <div class="emails" id="all-emails">press@usaid.gov; openwork@usaid.gov; emergency@nethope.org; starshield@spacex.com; StarlinkGSA@spacex.com; internetfreedom@state.gov; DRL-Public@state.gov; oiglpa@usaid.gov; BernACS@state.gov; starlink@spacex.com; FAO-CTVetting@state.gov</div>
+    </div>
+
+    <!-- VERSION 1 -->
+    <div id="page-v1" class="page active-page">
+      <div class="version-header">
+        <span class="version-number">1️⃣</span>
+        <span class="version-title">Version 1</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v1')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v1')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v1', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v1', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v1', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v1" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v1">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v1">
+Dear Sir/Madam,
+
+I am writing to urgently request assistance regarding the ongoing nationwide telecommunications blackout in Iran that began on February 28, 2026.
+
+At present, the Iranian population is experiencing complete digital darkness. Millions of people are disconnected from the global internet and from communication with one another. Access to information during crises is critically important.
+
+Without independent communication channels, the government controls the information reaching the public. Consequently, citizens are unable to easily access reliable news or verify what is happening within the country.
+
+Furthermore, there are currently no reliable or widely used systems to warn civilians about incoming attacks or emergency situations. Internet access is urgently needed so that people can receive evacuation alerts, safety instructions, and real-time updates that could help protect them and their families.
+
+For these reasons, we urge the swift deployment of satellite internet terminals.
+
+The administrative pathway already exists: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement through the GSA schedule.
+2. Rapid activation of services to support civilian protection.
+3. Assistance in enabling the entry and distribution of devices to those in need.
+
+Providing connectivity would help ensure that civilians can access life-saving information, maintain communication, and stay informed during this critical situation.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 2 -->
+    <div id="page-v2" class="page">
+      <div class="version-header">
+        <span class="version-number">2️⃣</span>
+        <span class="version-title">Version 2</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v2')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v2')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v2', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v2', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v2', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v2" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v2">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v2">
+Dear Sir/Madam,
+
+I am writing to request immediate attention to the complete telecommunications blackout that has affected Iran since February 28, 2026.
+
+Millions of people in Iran are currently experiencing total digital disconnection. They have been cut off from the global internet and from each other. Access to reliable information is essential, especially during periods of crisis.
+
+In the absence of independent communication channels, the government controls the information that reaches the public. This makes it extremely challenging for citizens to obtain trustworthy news or confirm events occurring within the country.
+
+Additionally, there are no reliable or widespread warning systems to alert civilians about incoming attacks or emergencies. Internet connectivity is urgently needed so people can receive evacuation warnings, safety instructions, and real-time updates to help protect themselves and their families.
+
+For these reasons, we strongly urge the deployment of satellite internet terminals as soon as possible.
+
+The administrative framework is already in place: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement through the GSA schedule.
+2. Rapid activation of services for civilian protection.
+3. Facilitation of the entry and distribution of devices to those in need.
+
+Restoring connectivity would allow civilians to access critical information, maintain communication, and remain informed during this urgent situation.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 3 -->
+    <div id="page-v3" class="page">
+      <div class="version-header">
+        <span class="version-number">3️⃣</span>
+        <span class="version-title">Version 3</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v3')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v3')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v3', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v3', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v3', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v3" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v3">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v3">
+Dear Sir/Madam,
+
+I am writing to urgently request intervention regarding the nationwide telecommunications blackout in Iran that has been ongoing since February 28, 2026.
+
+The Iranian population is currently experiencing complete digital isolation. Millions of citizens have been disconnected from the global internet and from one another. In times of crisis, access to reliable information is critically important.
+
+Without independent channels of communication, the government maintains full control over the flow of information reaching the public. As a result, citizens are unable to easily access trustworthy news or confirm what is happening inside their own country.
+
+Furthermore, there are no widely available or dependable systems to warn civilians about incoming attacks or emergency situations. Internet access is urgently needed so that people can receive evacuation alerts, safety guidance, and real-time updates that could help protect their lives and families.
+
+For these reasons, we respectfully urge you to accelerate the deployment of satellite internet terminals.
+
+The administrative pathway already exists: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement through the GSA schedule.
+2. Rapid activation of services to assist with civilian protection.
+3. Facilitation of the entry and distribution of devices to those in need.
+
+Restoring connectivity would allow civilians to access critical information, maintain independent communication, and remain informed during this extremely difficult period.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 4 -->
+    <div id="page-v4" class="page">
+      <div class="version-header">
+        <span class="version-number">4️⃣</span>
+        <span class="version-title">Version 4</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v4')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v4')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v4', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v4', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v4', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v4" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v4">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v4">
+Dear Sir/Madam,
+
+I am writing to request immediate intervention regarding the total telecommunications blackout in Iran since February 28, 2026.
+
+The Iranian population is currently facing complete digital darkness. Millions of people have been cut off from the global internet and from each other. Access to information is essential in moments of crisis.
+
+In the absence of independent communication channels, the government controls and manipulates the information that reaches the public. This makes it extremely difficult for citizens to access reliable news or verify events occurring in their own country.
+
+Additionally, there are currently no widespread or reliable warning systems for incoming attacks or emergency alerts. Civilians urgently need internet access to receive evacuation warnings, safety instructions, and real-time updates that could help them protect themselves and their families.
+
+For these reasons, we urge you to expedite the deployment of satellite internet terminals.
+
+The administrative path is established: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement via the GSA schedule.
+2. Rapid service activation to support civilian protection.
+3. Facilitation of the entry and distribution of devices to those in need.
+
+Providing connectivity would help ensure that civilians have access to life-saving information, independent communication, and the ability to remain informed during this critical time.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 5 -->
+    <div id="page-v5" class="page">
+      <div class="version-header">
+        <span class="version-number">5️⃣</span>
+        <span class="version-title">Version 5</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v5')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v5')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v5', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v5', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v5', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v5" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v5">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v5">
+Dear Sir/Madam,
+
+I am writing to urgently request intervention regarding the nationwide telecommunications blackout in Iran that has been ongoing since February 28, 2026.
+
+The Iranian population is currently experiencing complete digital isolation. Millions of citizens have been disconnected from the global internet and from one another. In times of crisis, access to reliable information is critically important.
+
+Without independent channels of communication, the government maintains full control over the flow of information reaching the public. As a result, citizens are unable to easily access trustworthy news or confirm what is happening inside their own country.
+
+Furthermore, there are no widely available or dependable systems to warn civilians about incoming attacks or emergency situations. Internet access is urgently needed so that people can receive evacuation alerts, safety guidance, and real-time updates that could help protect their lives and families.
+
+For these reasons, we respectfully urge you to accelerate the deployment of satellite internet terminals.
+
+The administrative pathway already exists: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement through the GSA schedule.
+2. Rapid activation of services to assist with civilian protection.
+3. Facilitation of the entry and distribution of devices to those in need.
+
+Restoring connectivity would allow civilians to access critical information, maintain independent communication, and remain informed during this extremely difficult period.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 6 -->
+    <div id="page-v6" class="page">
+      <div class="version-header">
+        <span class="version-number">6️⃣</span>
+        <span class="version-title">Version 6</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v6')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v6')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v6', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v6', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v6', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v6" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v6">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v6">
+Dear [Recipient Name/Title],
+
+I am writing as a concerned civilian regarding the escalating humanitarian crisis in Iran following the military actions initiated on February 28, 2026.
+
+Since the start of operations, the Iranian authorities have enforced a nationwide internet and telecommunications blackout. History and current reports from human rights organizations indicate that such "digital darkness" is frequently used to facilitate and conceal massacres and state violence against the civilian population.
+
+I am formally requesting that the (U.S. Government/SpaceX) take immediate steps to provide and facilitate the entry of satellite internet terminals (Starlink) for Iranian civilians for the following critical reasons:
+
+Preventing Massacres: Open connectivity allows the international community to monitor the situation in real-time, serving as a deterrent against human rights atrocities that thrive in isolation.
+The administrative pathway already exists: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+Civilian Safety: Access to global internet is vital for civilians to navigate active conflict zones, find medical assistance, and communicate with family members during the ongoing strikes.
+
+We respectfully request:
+1. Immediate procurement through the GSA schedule.
+2. Rapid activation of services to assist with civilian protection.
+3. Facilitation of the entry and distribution of devices to those in need.
+
+Restoring connectivity would allow civilians to access critical information, maintain independent communication, and remain informed during this extremely difficult period.
+
+Thank you for your immediate attention to this matter.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 7 -->
+    <div id="page-v7" class="page">
+      <div class="version-header">
+        <span class="version-number">7️⃣</span>
+        <span class="version-title">Version 7</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v7')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v7')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v7', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v7', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v7', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v7" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v7">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v7">
+Dear Sir/Madam,
+
+I am writing to request immediate action regarding the ongoing nationwide telecommunications blackout in Iran since February 28, 2026.
+
+Currently, the people of Iran are experiencing a complete loss of digital connectivity. Millions have been separated from the global internet and from basic communication with others. Access to accurate information is essential during periods of crisis.
+
+Without independent communication channels, information reaching the public is tightly controlled by the government. This situation prevents citizens from obtaining trustworthy news or confirming the events occurring within their country.
+
+Moreover, there are no reliable or widely implemented systems to notify civilians about potential attacks or emergency situations. Internet access is urgently required so individuals can receive evacuation alerts, safety recommendations, and real-time information necessary to protect themselves and their families.
+
+Therefore, we urge the expedited deployment of satellite internet terminals.
+
+The administrative process is already in place: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement via the GSA schedule.
+2. Rapid activation of services to assist civilian safety.
+3. Facilitation of the entry and distribution of devices to those who need them.
+
+Restoring connectivity would allow civilians to access critical information, maintain independent communication, and stay informed during this urgent situation.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 8 -->
+    <div id="page-v8" class="page">
+      <div class="version-header">
+        <span class="version-number">8️⃣</span>
+        <span class="version-title">Version 8</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v8')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v8')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v8', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v8', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v8', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v8" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v8">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v8">
+Dear Sir/Madam,
+
+I am writing to request urgent intervention regarding the total telecommunications blackout affecting Iran since February 28, 2026.
+
+The Iranian population is currently facing severe digital isolation. Millions of people have been disconnected from the global internet as well as from each other. In times of crisis, access to information is indispensable.
+
+Without independent communication channels, the flow of information reaching the public is controlled by the government. This makes it extremely difficult for citizens to obtain accurate news or confirm the reality of events unfolding in their country.
+
+Additionally, there are no widely available or dependable systems for warning civilians about incoming attacks or emergencies. Access to the internet is urgently needed so that individuals can receive evacuation alerts, safety guidance, and real-time updates that may help them safeguard themselves and their loved ones.
+
+For these reasons, we encourage the immediate deployment of satellite internet terminals.
+
+The administrative route is already established: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are accessible through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement through the GSA schedule.
+2. Prompt activation of services for civilian safety.
+3. Support in enabling the entry and distribution of devices to those who need them.
+
+Connectivity would help ensure civilians can access life-saving information, communicate freely, and remain informed during this difficult time.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 9 -->
+    <div id="page-v9" class="page">
+      <div class="version-header">
+        <span class="version-number">9️⃣</span>
+        <span class="version-title">Version 9</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v9')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v9')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v9', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v9', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v9', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v9" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v9">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v9">
+Dear Sir/Madam,
+
+I am writing to request urgent assistance concerning the complete telecommunications blackout affecting Iran since February 28, 2026.
+
+At present, the Iranian population is living in digital darkness. Millions of individuals have been cut off from the global internet and from communication with others. During moments of crisis, access to information is vital.
+
+Without independent communication channels, authorities control the information that reaches the population. This makes it extremely difficult for citizens to obtain reliable news or verify the events taking place within their country.
+
+In addition, there are currently no widespread or reliable systems to alert civilians about incoming attacks or emergencies. Access to the internet is essential so that people can receive evacuation warnings, safety instructions, and live updates that may help them protect themselves and their families.
+
+For these reasons, we strongly encourage the rapid deployment of satellite internet terminals.
+
+The necessary administrative framework already exists: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement through the GSA schedule.
+2. Fast activation of services for civilian protection.
+3. Assistance in enabling the entry and distribution of devices to those in need.
+
+Providing connectivity would help ensure civilians can obtain life-saving information, maintain communication, and stay informed during this critical situation.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSION 10 -->
+    <div id="page-v10" class="page">
+      <div class="version-header">
+        <span class="version-number">🔟</span>
+        <span class="version-title">Version 10</span>
+      </div>
+      
+      <div class="btn-group">
+        <button class="btn mobile" onclick="sendMobile('v10')">📱 Open in Mail App</button>
+        <button class="btn web" onclick="sendWeb('v10')">🌐 Gmail Web</button>
+      </div>
+
+      <div class="copy-section">
+        <div class="label">📋 Copy Options:</div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyContent('v10', 'addresses')">📧 Copy All Addresses</button>
+          <button class="copy-btn" onclick="copyContent('v10', 'subject')">📌 Copy Subject</button>
+          <button class="copy-btn" onclick="copyContent('v10', 'body')">📄 Copy Full Email</button>
+        </div>
+        <div id="success-v10" style="min-height: 2.5rem;"></div>
+        
+        <div class="label">Subject:</div>
+        <div class="subject-display" id="subject-v10">URGENT: Humanitarian Request for Satellite Connectivity (GSA SIN 33411)</div>
+        
+        <div class="label">Email Body:</div>
+        <div class="body-preview" id="body-v10">
+Dear Sir/Madam,
+
+I am writing to request immediate action regarding the ongoing nationwide telecommunications blackout in Iran since February 28, 2026.
+
+Currently, the people of Iran are experiencing a complete loss of digital connectivity. Millions have been separated from the global internet and from basic communication with others. Access to accurate information is essential during periods of crisis.
+
+Without independent communication channels, information reaching the public is tightly controlled by the government. This situation prevents citizens from obtaining trustworthy news or confirming the events occurring within their country.
+
+Moreover, there are no reliable or widely implemented systems to notify civilians about potential attacks or emergency situations. Internet access is urgently required so individuals can receive evacuation alerts, safety recommendations, and real-time information necessary to protect themselves and their families.
+
+Therefore, we urge the expedited deployment of satellite internet terminals.
+
+The administrative process is already in place: Starlink hardware (SIN 33411) and Priority Services (SIN 517410) are available through SpaceX's GSA Multiple Award Schedule (MAS).
+
+We respectfully request:
+1. Immediate procurement via the GSA schedule.
+2. Rapid activation of services to assist civilian safety.
+3. Facilitation of the entry and distribution of devices to those who need them.
+
+Restoring connectivity would allow civilians to access critical information, maintain independent communication, and stay informed during this urgent situation.
+
+Sincerely,
+[Your name, surname - city]
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      ⚡ 10 versions available • All 11 recipients in BCC • Green for mobile • Blue for Gmail
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.tab');
+    const pages = document.querySelectorAll('.page');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        pages.forEach(p => p.classList.remove('active-page'));
+        
+        tab.classList.add('active');
+        
+        const pageId = 'page-' + tab.getAttribute('data-page');
+        document.getElementById(pageId).classList.add('active-page');
+      });
+    });
+
+    // Common email addresses for all versions
+    const allEmails = [
+      "press@usaid.gov",
+      "openwork@usaid.gov",
+      "emergency@nethope.org",
+      "starshield@spacex.com",
+      "StarlinkGSA@spacex.com",
+      "internetfreedom@state.gov",
+      "DRL-Public@state.gov",
+      "oiglpa@usaid.gov",
+      "BernACS@state.gov",
+      "starlink@spacex.com",
+      "FAO-CTVetting@state.gov"
+    ];
+
+    // Data for all versions
+    const pageData = {
+      v1: {
+        subject: document.getElementById('subject-v1')?.innerText || '',
+        body: document.getElementById('body-v1')?.innerText || ''
+      },
+      v2: {
+        subject: document.getElementById('subject-v2')?.innerText || '',
+        body: document.getElementById('body-v2')?.innerText || ''
+      },
+      v3: {
+        subject: document.getElementById('subject-v3')?.innerText || '',
+        body: document.getElementById('body-v3')?.innerText || ''
+      },
+      v4: {
+        subject: document.getElementById('subject-v4')?.innerText || '',
+        body: document.getElementById('body-v4')?.innerText || ''
+      },
+      v5: {
+        subject: document.getElementById('subject-v5')?.innerText || '',
+        body: document.getElementById('body-v5')?.innerText || ''
+      },
+      v6: {
+        subject: document.getElementById('subject-v6')?.innerText || '',
+        body: document.getElementById('body-v6')?.innerText || ''
+      },
+      v7: {
+        subject: document.getElementById('subject-v7')?.innerText || '',
+        body: document.getElementById('body-v7')?.innerText || ''
+      },
+      v8: {
+        subject: document.getElementById('subject-v8')?.innerText || '',
+        body: document.getElementById('body-v8')?.innerText || ''
+      },
+      v9: {
+        subject: document.getElementById('subject-v9')?.innerText || '',
+        body: document.getElementById('body-v9')?.innerText || ''
+      },
+      v10: {
+        subject: document.getElementById('subject-v10')?.innerText || '',
+        body: document.getElementById('body-v10')?.innerText || ''
+      }
+    };
+
+    // Refresh data from DOM
+    function refreshData() {
+      pageData.v1.subject = document.getElementById('subject-v1')?.innerText || pageData.v1.subject;
+      pageData.v1.body = document.getElementById('body-v1')?.innerText || pageData.v1.body;
+      pageData.v2.subject = document.getElementById('subject-v2')?.innerText || pageData.v2.subject;
+      pageData.v2.body = document.getElementById('body-v2')?.innerText || pageData.v2.body;
+      pageData.v3.subject = document.getElementById('subject-v3')?.innerText || pageData.v3.subject;
+      pageData.v3.body = document.getElementById('body-v3')?.innerText || pageData.v3.body;
+      pageData.v4.subject = document.getElementById('subject-v4')?.innerText || pageData.v4.subject;
+      pageData.v4.body = document.getElementById('body-v4')?.innerText || pageData.v4.body;
+      pageData.v5.subject = document.getElementById('subject-v5')?.innerText || pageData.v5.subject;
+      pageData.v5.body = document.getElementById('body-v5')?.innerText || pageData.v5.body;
+      pageData.v6.subject = document.getElementById('subject-v6')?.innerText || pageData.v6.subject;
+      pageData.v6.body = document.getElementById('body-v6')?.innerText || pageData.v6.body;
+      pageData.v7.subject = document.getElementById('subject-v7')?.innerText || pageData.v7.subject;
+      pageData.v7.body = document.getElementById('body-v7')?.innerText || pageData.v7.body;
+      pageData.v8.subject = document.getElementById('subject-v8')?.innerText || pageData.v8.subject;
+      pageData.v8.body = document.getElementById('body-v8')?.innerText || pageData.v8.body;
+      pageData.v9.subject = document.getElementById('subject-v9')?.innerText || pageData.v9.subject;
+      pageData.v9.body = document.getElementById('body-v9')?.innerText || pageData.v9.body;
+      pageData.v10.subject = document.getElementById('subject-v10')?.innerText || pageData.v10.subject;
+      pageData.v10.body = document.getElementById('body-v10')?.innerText || pageData.v10.body;
+    }
+
+    // Show success message
+    function showSuccess(version) {
+      const div = document.getElementById(`success-${version}`);
+      if (div) {
+        div.innerHTML = '<div class="success-msg">✓ Copied to clipboard</div>';
+        setTimeout(() => div.innerHTML = '', 2000);
+      }
+    }
+
+    // Mobile send function with BCC
+    window.sendMobile = function(version) {
+      refreshData();
+      const data = pageData[version];
+      if (!data) return;
+      
+      // Using bcc parameter to place all recipients in BCC
+      const mailtoString = `mailto:?bcc=${encodeURIComponent(allEmails.join(','))}&subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.body)}`;
+      
+      setTimeout(() => {
+        window.location.href = mailtoString;
+      }, 50);
+    };
+
+    // Web send function with BCC (Gmail)
+    window.sendWeb = function(version) {
+      refreshData();
+      const data = pageData[version];
+      if (!data) return;
+      
+      // Gmail uses bcc parameter
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&bcc=${encodeURIComponent(allEmails.join(','))}&su=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.body)}`;
+      window.open(gmailUrl, '_blank');
+    };
+
+    // Copy content function
+    window.copyContent = function(version, type) {
+      refreshData();
+      const data = pageData[version];
+      if (!data) return;
+      
+      let textToCopy = '';
+      if (type === 'addresses') {
+        textToCopy = allEmails.join('; ');
+      } else if (type === 'subject') {
+        textToCopy = data.subject;
+      } else if (type === 'body') {
+        textToCopy = data.body;
+      }
+      
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showSuccess(version);
+      }).catch(() => {
+        alert('Copy failed. Please select and copy manually.');
+      });
+    };
+  </script>
+</body>
+</html>
